@@ -17,8 +17,8 @@ int main()
 	server_sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
 	server_address.sin_family = AF_INET;
-	server_address.sin_addr.s_addr = inet_addr("127.0.0.1");
-	server_address.sin_port = 9374;
+	server_address.sin_addr.s_addr = htonl(INADDR_ANY);
+	server_address.sin_port = htons(9374);
 
 	server_len = sizeof(server_address);
 	client_len = sizeof(client_address);
