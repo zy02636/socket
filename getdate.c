@@ -36,13 +36,14 @@ int main(int argc, char *argv[])
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	address.sin_family = AF_INET;
 	address.sin_port = servinfo->s_port;
-	address.sin_addr = *(struct sockaddr *)*hostinfo->h_addr_list;
-	len = sizeof(addrees);
+	address.sin_addr = *(struct in_addr *)*hostinfo->h_addr_list;
+	len = sizeof(address);
 
 	result = connect(sockfd, (struct sockaddr *)&address, len);
 	if (result == -1) {
 		perror("oops: getdate");
 		exit(1);
+	}
 	result = read(sockfd, buffer, sizeof(buffer));	
 	buffer[result] = '\0';
 	printf ( "read %d bytes: %s.\n", result, buffer );
